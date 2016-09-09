@@ -2,3 +2,11 @@ language: go
 
 go:
   - 1.7
+
+install:
+  - curl -s -o $HOME/.nvm/nvm.sh https://raw.githubusercontent.com/creationix/nvm/v0.31.0/nvm.sh
+  - source $HOME/.nvm/nvm.sh
+  - nvm install stable
+  - node -v
+  - find . -name *_test.js | xargs node
+  - go get -t ./...
