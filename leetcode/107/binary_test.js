@@ -1,4 +1,5 @@
 "use strict";
+const test = require('../../test.js');
 
 function TreeNode(val, left, right) { [this.val, this.left, this.right] = [val, left, right]; }
 
@@ -26,24 +27,11 @@ function level(nodes) {
     return [vals, next];
 }
 
-function test(fn, nodes, expected) {
-    let [out, exp] = [JSON.stringify(fn(nodes)), JSON.stringify(expected)];
-
-    if (out !== exp) { process.stdout.write("expected: " + exp + "\ngot:      " + out + "\n"); return false; }
-    return true;
-}
-
-function Test() {
-    let failure = false;
-    for (let i in arguments) { if (!arguments[i]) { failure = true; }}
-    if (failure) { process.exit(1); }
-}
-
-Test(
-    test(levelOrderBottom, null, []),
-    test(levelOrderBottom, new TreeNode(1, null, null), [[1]]),
-    test(levelOrderBottom, new TreeNode(1, new TreeNode(2, null, null), new TreeNode(3, null, null)), [[2, 3], [1]]),
-    test(level, [new TreeNode(1, null, null)], [[1], []]),
-    test(level, [new TreeNode(1, new TreeNode(2, null, null), new TreeNode(3, null, null))], [[1], [new TreeNode(2, null, null), new TreeNode(3, null, null)]]),
-    test(level, [new TreeNode(1, null, null), new TreeNode(2, null, null)], [[1, 2], []])
+test.Run(
+    test.test(levelOrderBottom(null), []),
+    test.test(levelOrderBottom(new TreeNode(1, null, null)), [[1]]),
+    test.test(levelOrderBottom(new TreeNode(1, new TreeNode(2, null, null), new TreeNode(3, null, null))), [[2, 3], [1]]),
+    test.test(level([new TreeNode(1, null, null)]), [[1], []]),
+    test.test(level([new TreeNode(1, new TreeNode(2, null, null), new TreeNode(3, null, null))]), [[1], [new TreeNode(2, null, null), new TreeNode(3, null, null)]]),
+    test.test(level([new TreeNode(1, null, null), new TreeNode(2, null, null)]), [[1, 2], []])
 );
