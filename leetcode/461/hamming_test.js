@@ -1,7 +1,7 @@
 "use strict";
 const test = require('../../test.js');
 
-var hammingDistance = function(x, y) { return bits(x ^ y); }
+var hammingDistance = function(x, y) { return bits(x ^ y); };
 
 function bits(num) {
     let count = 0;
@@ -10,7 +10,7 @@ function bits(num) {
 	num /= 2;
     }
     return count;
-}
+};
 
 test.Run(
     test.test(bits(0), 0),
